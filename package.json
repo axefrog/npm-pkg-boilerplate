@@ -6,7 +6,7 @@
     "test": "mocha --opts ./mocha.opts",
     "test-dev": "mocha --opts ./mocha.opts --watch --bail",
     "test-dev-mem": "node --max_old_space_size=8192 ./node_modules/mocha/bin/_mocha --opts ./mocha.opts --watch --bail",
-    "serve-docs": "browser-sync start --server --files ./docs"
+    "serve-docs": "browser-sync start --server --files ./docs --ss ./docs"
   },
   "main": "lib/es2015/index.js",
   "module": "lib/es2015/index.js",
