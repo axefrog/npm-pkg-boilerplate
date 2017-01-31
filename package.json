@@ -1,10 +1,11 @@
 {
-  "name": "yreuq.js",
+  "name": "npm-package-boilerplate",
   "version": "1.0.0",
   "description": "Boilerplate NPM Package",
   "scripts": {
     "test": "mocha --opts ./mocha.opts",
     "test-dev": "mocha --opts ./mocha.opts --watch --bail",
+    "test-dev-mem": "node --max_old_space_size=8192 ./node_modules/mocha/bin/_mocha --opts ./mocha.opts --watch --bail",
     "serve-docs": "browser-sync start --server --files ./docs"
   },
   "main": "lib/es2015/index.js",

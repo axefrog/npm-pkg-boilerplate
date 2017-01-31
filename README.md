@@ -23,3 +23,9 @@ little bit less painful.
 - Lines ending in `// ## DEBUG ONLY` are retained for local debugging, but stripped during the final
   build process
 - As above, for multiline blocks fenced between `// ## DEBUG START` and `// ## DEBUG END`
+
+## Usage
+
+1. For testing during development: `yarn run test-dev`, then `CTRL+SHIFT+B` in VSCode (F5 to debug tests)
+2. For building docs: `gulp docs` (make sure docs are turned on in repo settings)
+3. For building everything: `gulp`

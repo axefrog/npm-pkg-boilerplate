@@ -10,6 +10,8 @@ const typedoc = require('gulp-typedoc');
 const rimraf = require('rimraf');
 const merge = require('merge2');
 
+const title = 'NPM Package Boilerplate';
+
 const tsproj = {
   js: ts.createProject('./tsconfig.json', {target: 'es5'}),
   es2015: ts.createProject('./tsconfig.json', {target: 'es6', 'declaration': true}),
@@ -26,7 +28,7 @@ function removeDebugLines(buffer) {
 
 function replaceSourcePaths(buffer) {
   const src = buffer.toString();
-  return src.replace(/..\/src\//g, '../es2015/');
+  return src.replace(/..\/src/g, '../es2015/');
 }
 
 function compile() {
@@ -85,7 +87,7 @@ function buildDocs() {
       target: 'es6',
       out: './docs',
       json: './docs/docs.json',
-      name: 'yreuq.js',
+      name: title,
       theme: 'default',
       ignoreCompilerErrors: false,
       excludeExternals: true,
@@ -97,15 +99,13 @@ function finalizeDocs() {
     .pipe(gulp.dest('./docs'));
 }
 
-gulp.task('typedoc:build', buildDocs);
-gulp.task('typedoc', ['typedoc:build'], finalizeDocs);
+gulp.task('docs:build', buildDocs);
+gulp.task('docs', ['docs:build'], finalizeDocs);
 gulp.task('clean', cb => rimraf('./lib', cb));
 gulp.task('preprocess', preprocess);
 gulp.task('compile', ['preprocess'], compile);
-gulp.task('watch', () => gulp.watch(['./src/**/*.ts', './tests/**/*.ts', './README.md'], ['build']));
 gulp.task('test', ['compile', 'lint'], runTests);
 gulp.task('lint', ['preprocess', 'compile'], lint);
 gulp.task('build', ['preprocess', 'compile', 'test', 'lint']);
-gulp.task('dev', ['build', 'watch']);
-gulp.task('dev:docs', ['typedoc'], () => gulp.watch(['./lib/src/**/*.ts', './README.md'], ['typedoc']));
-gulp.task('default', ['compile']);
+gulp.task('watch', ['build'], () => gulp.watch(['./src/**/*.ts', './tests/**/*.ts', './README.md'], ['build']));
+gulp.task('default', ['build']);
